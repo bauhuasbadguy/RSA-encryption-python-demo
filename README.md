@@ -6,7 +6,7 @@ This algorithm involves Alice generating the key that Alice and Bob are going to
 
 Bob will generate the public and private keys by first chosing two large integers p and q. He will then compute n = p*q which will form one part of the public key. It is decomposing n into p and q which is the reason this key sharing scheme will be totally broken by quantum computers since one of the tasks quantum computers are good for is factorising numbers. 
 
-Next the value of the Euler totient function is calculate as \Phi = (p-1) * (q-1). 
+Next the value of the Euler totient function is calculated as \Phi = (p-1) * (q-1). 
 
 Now choose an integer between 1 and \Phi, this value must be coprime with \Phi and will be `e`. 
 
@@ -27,3 +27,5 @@ EXPLAIN RSA SIGNING HERE
 ### Sources ###
 
 * https://en.wikipedia.org/wiki/RSA_(cryptosystem)
+
+NOTE FIX SPELLING IN REPO NAME
