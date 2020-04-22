@@ -272,7 +272,6 @@ def encryptwtchina(mesage, p, q, ep, eq, qinv):
         h = (qinv * (M1 - M2)) % p
 
 
-
     s = M2 + (h*q)
     #print s
     return s
@@ -281,16 +280,10 @@ def encryptwtchina(mesage, p, q, ep, eq, qinv):
 #Binary methods#
 ################
 
-
-
 #L modular exponential
 #Find B=(A^E)%n
-def Lmodexp(A, E, n):
+#def Lmodexp(A, E, n):
     
-
-
-
-
 
 ######################
 #Start implementation#
@@ -305,7 +298,7 @@ q = findprimes(284)
 
 n = p * q
 tot = (p - 1) * (q - 1)
-print 'Found n,it\'s '+ repr(n)
+print('Found n,it\'s '+ repr(n))
 pqntottime = time.time() - t
 pub = genrandpub(tot)
 
@@ -314,35 +307,35 @@ mesage = 10473
 
 
 #pub = candlist[rand.randint(int(length(candlist)/10), length(candlist))]
-print 'Found public key it\'s ' + repr(pub)
+print('Found public key it\'s ' + repr(pub))
 priv = privkey(n, pub, tot)
 #priv = priveytrialanderror(n, pub, tot)
 privkeytime = time.time() - pubkeytime - t
-print 'Found private key, it\'s ' + repr(priv)
+print('Found private key, it\'s ' + repr(priv))
 #p = 137
 #q = 131
 #n = 17947
 #pub = 3
 #priv = 11787
 
-print mesage
+print(mesage)
 encrypted = encryptnumber(mesage, pub, n)
 A = encrypted
 encryptiontime = time.time() - privkeytime - t
-print encrypted
+print(encrypted)
 decrypted = decryptnumber(encrypted, priv, n)
 decryptiontime = time.time() - encryptiontime - t
-print decrypted
+print(decrypted)
 
-print 'Generating p,q,n and totient function took ' + repr(pqntottime) + 's'
-print '--------------------------------------------------'
-print 'Generating the public key took ' + repr(pubkeytime) + 's'
-print '--------------------------------------------------'
-print 'Generating the private key took ' + repr(privkeytime) + 's'
-print '--------------------------------------------------'
-print 'Encrypting the data took ' + repr(encryptiontime) + 's'
-print '--------------------------------------------------'
-print 'Dycrypting the data took ' + repr(decryptiontime) + 's'
+print('Generating p,q,n and totient function took ' + repr(pqntottime) + 's')
+print('--------------------------------------------------')
+print('Generating the public key took ' + repr(pubkeytime) + 's')
+print('--------------------------------------------------')
+print('Generating the private key took ' + repr(privkeytime) + 's')
+print('--------------------------------------------------')
+print('Encrypting the data took ' + repr(encryptiontime) + 's')
+print('--------------------------------------------------')
+print('Dycrypting the data took ' + repr(decryptiontime) + 's')
 
 
 
@@ -356,10 +349,10 @@ result = decryptwtchina(A, p, q, dp, dq, qinv)
 
 chinatime = time.time() - chinaexponenttime - t
 
-print result
+print(result)
 
-print '*******'
-print 'The chinese remainder system decryption took ' + repr(chinatime)
+print('*******')
+print('The chinese remainder system decryption took ' + repr(chinatime))
 
 
 
@@ -374,7 +367,7 @@ chinaencryptexponenttime = time.time() - chinatime - t
 result1 = encryptwtchina(mesage, p, q, ep, eq, qinv)
 
 chinaencrypttime = time.time() - chinaencryptexponenttime - t
-print '**********'
-print result1
-print chinaencrypttime
+print('**********')
+print(result1)
+print(chinaencrypttime)
 
