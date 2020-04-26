@@ -56,7 +56,6 @@ def findprimes(startnumber):
     if startnumber % 2 == 0:
         trynumber -= 1
 
-        
     while exitnumber != 0:
         trynumber += 2
         
@@ -67,7 +66,6 @@ def findprimes(startnumber):
                 
                 break
 
-            
         if remainder != 0:
             exitnumber = 0
     return trynumber
@@ -84,10 +82,7 @@ def genrandpub(tot):
             key = val
 
     return key
-            
-        
-    
-        
+
 def potentpublist(totient):
     #list of potential values for the public key
     candlist = []
@@ -101,16 +96,8 @@ def potentpublist(totient):
         if totient % val == 0 or val >= totient:
             
             candlist.remove(val)
-            
-    
-    return candlist
 
-def privkey(n, pub, totient):
-    #can be done either using pure random guessing (try every number to find a functional private key)
-    #or by the backwards Euclidean Algorithm
-    #here y is set to -2 in the equation (e*x)+(tot*y)=1 x is the private key and e is the public one
-    key = modinv(pub, totient)
-    return key
+    return candlist
 
 def priveytrialanderror(n, pub, tot):
     
@@ -125,7 +112,6 @@ def priveytrialanderror(n, pub, tot):
             if incidence == 1:
                 found = True
     return key
-
 
 
 def generatekeys(minp, minq):
@@ -167,13 +153,9 @@ def decryptnumber(c, pr, n):
 
     return mf
 
-
-
-
 ##############################################
 #Start time saving versions of the algorithms#
 ##############################################
-
 
 def findchinesecoeffsdecrpt(q, p, n, priv):
 
@@ -190,8 +172,6 @@ def findchinesecoeffsdecrpt(q, p, n, priv):
     return [dp, dq, qinv]
 
 
-
-
 def decryptwtchina(A, p, q, dp, dq, qinv):
 
     m1 = long(1)
@@ -206,9 +186,7 @@ def decryptwtchina(A, p, q, dp, dq, qinv):
     for i in range(dq):
         m2 = m2 * A
 
-
     M2 = m2 % q
-
 
     if M1 < M2:
 
@@ -217,8 +195,6 @@ def decryptwtchina(A, p, q, dp, dq, qinv):
 
     else:
         h = (qinv * (M1 - M2)) % p
-
-
 
     s = M2 + (h*q)
     #print s
@@ -259,9 +235,7 @@ def encryptwtchina(mesage, p, q, ep, eq, qinv):
     for i in range(dq):
         m2 = m2 * A
 
-
     M2 = m2 % q
-
 
     if M1 < M2:
 
