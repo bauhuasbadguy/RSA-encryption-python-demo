@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 26 17:22:57 2020
-
-@author: stuart
-"""
 
 #RSA signing
 
