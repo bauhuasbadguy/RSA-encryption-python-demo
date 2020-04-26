@@ -93,6 +93,7 @@ message = 1042
 
 #now find the private key, d. This must be the modular multiplicative inverse of 1%tot. i.e.
 #(d * e) % tot = 1
+#d = e^-1 (mod tot)
 priv = 413
 
 #Bob encrypt his message using the public key
