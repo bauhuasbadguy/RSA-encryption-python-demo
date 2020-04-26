@@ -2,6 +2,9 @@
 
 import random
 
+
+#I tried many times to make this myself and ended up copying a version off stack exchange because mine
+#always broke
 def extended_gcd(aa, bb):
     lastremainder, remainder = abs(aa), abs(bb)
     x, lastx, y, lasty = 0, 1, 1, 0
@@ -14,52 +17,8 @@ def extended_gcd(aa, bb):
 def modinv(a, m):
     g, x, y = extended_gcd(a, m)
     if g != 1:
-        raise ValueError
+        raise Exception('There is no multiplicative inverse of', a, 'and', m)
     return x % m
-
-
-def privkey(n, pub, totient):
-    #can be done either using pure random guessing (try every number to find a functional private key)
-    #or by the backwards Euclidean Algorithm
-    #here y is set to -2 in the equation (e*x)+(tot*y)=1 x is the private key and e is the public one
-    key = modinv(pub, totient)
-    return key
-
-
-def findprimes(startnumber):
-    trynumber = startnumber
-    exitnumber = 1
-    #make sure we only look at even numbers
-    if startnumber % 2 == 0:
-        trynumber -= 1
-
-    while exitnumber != 0:
-        trynumber += 2
-        
-        for i in range(3, int(((trynumber + 1) / 2) + 2), 2):
-            
-            remainder = trynumber % i
-            if remainder == 0:
-                
-                break
-
-        if remainder != 0:
-            exitnumber = 0
-    return trynumber
-
-
-
-def genrandpub(tot):
-    key = 0
-    while key == 0:
-        start = random.randint(int(tot/5),int((tot/5) *4))
-
-        val = findprimes(start)
-
-        if tot % val != 0 and val <= tot:
-            key = val
-
-    return key
 
 
 
@@ -67,10 +26,9 @@ def genrandpub(tot):
 ### End of function definitions ###
 ###################################
 
-
-
-
-#This is the starting point. Alice will generate two prime numbers, p and q
+#This is the starting point. Alice will generate two prime numbers, p and q.
+#Here I am using 61 and 53 since they are in the wikipeida example. Normally you
+#would expect these to be much much larger
 p = 61
 q = 53
 
@@ -83,20 +41,27 @@ print('n =', n)
 #now calculate the totient function. This will be used to generate the private key
 tot = (p - 1) * (q - 1)
 
-#now find a publc key, e. This must be coprime to the toient function and is chosen by Alice from a list
-#of candidates
+#now find a public key, e. This must be coprime to the totient function and is chosen by Alice who has
+#generated a series of values coprime to the totient function.
 pub = 17
-
-#the message, provided by Alice. This will be the key Alice and Bob use for further communtication.
-#The value of this must be less than n for RSA to work properly
-message = 1042
 
 #now find the private key, d. This must be the modular multiplicative inverse of 1%tot. i.e.
 #(d * e) % tot = 1
 #d = e^-1 (mod tot)
-priv = 413
+#calculate this value using the backwards Euclidean Algorithm. The function is given here but you
+#don't need to fully understand it to get the basic idea of RSA encryption
+priv = modinv(pub, tot)
 
-#Bob encrypt his message using the public key
+#the message, provided by Alice. This will be the key Alice and Bob use for further communication.
+#The value of this must be less than n for RSA to work properly
+message = 1042
+
+
+#verifiy this is the multiplicative inverse here by showing (e*d)%totient = 1
+verification = (pub * priv) % tot
+print('verify private key is the multiplictive inverse:', verification)
+
+#Bob encrypts his message using the public key
 #encrypted = message^(e) % n
 encrypted = pow(message, pub, n)
 

@@ -26,51 +26,6 @@ def modinv(a, m):
     return x % m
 
 
-def privkey(n, pub, totient):
-    #can be done either using pure random guessing (try every number to find a functional private key)
-    #or by the backwards Euclidean Algorithm
-    #here y is set to -2 in the equation (e*x)+(tot*y)=1 x is the private key and e is the public one
-    key = modinv(pub, totient)
-    return key
-
-
-def findprimes(startnumber):
-    trynumber = startnumber
-    exitnumber = 1
-    #make sure we only look at even numbers
-    if startnumber % 2 == 0:
-        trynumber -= 1
-
-    while exitnumber != 0:
-        trynumber += 2
-        
-        for i in range(3, int(((trynumber + 1) / 2) + 2), 2):
-            
-            remainder = trynumber % i
-            if remainder == 0:
-                
-                break
-
-        if remainder != 0:
-            exitnumber = 0
-    return trynumber
-
-
-
-def genrandpub(tot):
-    key = 0
-    while key == 0:
-        start = random.randint(int(tot/5),int((tot/5) *4))
-
-        val = findprimes(start)
-
-        if tot % val != 0 and val <= tot:
-            key = val
-
-    return key
-
-
-
 ###################################
 ### End of function definitions ###
 ###################################
@@ -96,22 +51,24 @@ print('n =', n)
 #now calculate the totient function. This will be used to generate the private key
 tot = (p - 1) * (q - 1)
 
-#now find a publc key, e. This must 
-pub = 17
+#now find a private key, e. This must be coprime to the totient function and is chosen by Alice.
+#She must keep this to sign further messages.
+e = 17
 
-#the message, the value of this must be less than n
+#now find the public key, d. This must be the modular multiplicative inverse of 1%tot
+#i.e. (D * e) % tot = 1
+d = modinv(e, tot)
+
+#the message to be used to generate the signature, sent by Bob. The value of this must be less than n.
 message = 1042
-
-#now find the private key, d. This must 
-priv = 413
 
 #Alice will now encrypt Bob's message with her private key.
 #encrypted = message^(e) % n
-encrypted = pow(message, priv, n)
+encrypted = pow(message, d, n)
 
-#Bob decrypts Alices signed message, if it matches the message he sent he has confirmed Alice's identity.
+#Bob decrypts Alice's signed message, if it matches the message he sent he has confirmed Alice's identity.
 #message = encrypted^(d) % n
-decrypted = pow(encrypted, pub, n)
+decrypted = pow(encrypted, e, n)
 
 print('Uncrypted')
 print(message)
