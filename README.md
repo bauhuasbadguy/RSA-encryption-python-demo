@@ -20,7 +20,7 @@ In this way Alice and Bob exchange a secret key which they can then use to encry
 
 This tool also be used to sign a file as coming from a specific person.
 
-If Bob wants Alice to sign a file he will send a message which he asks Alice to encrypt using `e`, which is now the private key, not the public key. Now Alice sends Bob the encrypted message along with `d` and `n` which are the public keys here. By decrypting the message Bob has confirmed that Alice is the owner of her private key. Allowing her to sign any other files she wants to send to Bob by asking Bob to send another message to encrypt thereby ensuring all subsequent files originate from the same source.
+If Bob wants Alice to sign a file he will send a message which he asks Alice to encrypt using e, which is now the private key, not the public key. Now Alice sends Bob the encrypted message along with d and n which are the public keys here. By decrypting the message Bob has confirmed that Alice is the owner of her private key. Allowing her to sign any other files she wants to send to Bob by asking Bob to send another message to encrypt thereby ensuring all subsequent files originate from the same source.
 
 ### IMPORTANT NOTE ###
 
@@ -29,5 +29,4 @@ I am some guy in a room. You should never use the code here for real encryption 
 ### Sources ###
 
 * https://en.wikipedia.org/wiki/RSA_(cryptosystem)
-
-NOTE FIX SPELLING IN REPO NAME
+* 
