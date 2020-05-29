@@ -6,7 +6,7 @@ I did this in 2016 and spent a lot of time trying to understand how to efficient
 
 This algorithm involves Alice having a message which she wants to send to Bob. Alice requests a public key from Bob, who will generate a private and a public key. Bob sends his public key to Alice who encrypts the message using the public key and sends the encrypted message to Bob who can decrypt the message using his private key.
 
-Bob will generate the public and private keys by first choosing two large, prime integers p and q. He will then compute n = p*q which will form one part of the public key. The difficulty of breaking this encryption scheme is the difficulty of the task of decomposing n into p and q. However this is asl the reason this key sharing scheme will be totally broken by quantum computers since one of the tasks quantum computers are good for is factorising numbers. 
+Bob will generate the public and private keys by first choosing two large, prime integers p and q. He will then compute n = p*q which will form one part of the public key. The difficulty of breaking this encryption scheme is the difficulty of the task of decomposing n into p and q. However this is also the reason this key sharing scheme will be totally broken by quantum computers since one of the tasks quantum computers are good for is factorising large numbers. 
 
 Next the value of the Euler totient function is calculated as &Phi; = (p-1) * (q-1). 
 
